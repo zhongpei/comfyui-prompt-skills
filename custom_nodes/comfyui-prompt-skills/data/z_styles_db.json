@@ -1,0 +1,359 @@
+{
+    "meta": {
+        "model_version": "Z-Image Turbo / SDXL",
+        "last_updated": "2026-01-07",
+        "description": "风格库 for ComfyUI Prompt Skills plugin"
+    },
+    "styles": {
+        "photography": [
+            {
+                "id": "analog_film",
+                "name": "Analog Film",
+                "name_zh": "胶片摄影",
+                "keywords": [
+                    "shot on film",
+                    "film grain",
+                    "35mm",
+                    "analog photography",
+                    "vintage"
+                ],
+                "tech_specs": "Kodak Portra 400, grain, soft focus",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "cinematic",
+                "name": "Cinematic",
+                "name_zh": "电影感",
+                "keywords": [
+                    "cinematic lighting",
+                    "anamorphic lens",
+                    "movie still",
+                    "dramatic lighting",
+                    "widescreen"
+                ],
+                "tech_specs": "anamorphic lens flare, color grading, 2.39:1 aspect ratio",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "studio_portrait",
+                "name": "Studio Portrait",
+                "name_zh": "棚拍人像",
+                "keywords": [
+                    "studio lighting",
+                    "softbox",
+                    "85mm lens",
+                    "sharp focus",
+                    "professional portrait"
+                ],
+                "tech_specs": "Rembrandt lighting, rim light, 85mm f/1.2",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "street",
+                "name": "Street Photography",
+                "name_zh": "街头摄影",
+                "keywords": [
+                    "street photography",
+                    "candid",
+                    "urban",
+                    "documentary style",
+                    "natural light"
+                ],
+                "tech_specs": "35mm lens, f/8, deep depth of field, Leica style",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "golden_hour",
+                "name": "Golden Hour",
+                "name_zh": "黄金时刻",
+                "keywords": [
+                    "golden hour",
+                    "warm light",
+                    "sunset",
+                    "backlit",
+                    "lens flare"
+                ],
+                "tech_specs": "warm color temperature, sun flare, silhouette",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "noir",
+                "name": "Film Noir",
+                "name_zh": "黑色电影",
+                "keywords": [
+                    "film noir",
+                    "black and white",
+                    "high contrast",
+                    "shadows",
+                    "dramatic"
+                ],
+                "tech_specs": "venetian blinds shadows, low key lighting, 1940s style",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            }
+        ],
+        "illustration": [
+            {
+                "id": "vintage_anime",
+                "name": "Vintage Anime",
+                "name_zh": "复古动漫",
+                "keywords": [
+                    "1990s anime screenshot",
+                    "cel shaded",
+                    "hand drawn",
+                    "VHS quality",
+                    "retro anime"
+                ],
+                "tech_specs": "cel animation, limited palette, scan lines",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "ghibli",
+                "name": "Ghibli Style",
+                "name_zh": "吉卜力风格",
+                "keywords": [
+                    "Ghibli style",
+                    "detailed background painting",
+                    "watercolor",
+                    "pastoral",
+                    "Miyazaki"
+                ],
+                "tech_specs": "cumulonimbus clouds, lush greenery, whimsical atmosphere",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "vector",
+                "name": "Vector Art",
+                "name_zh": "矢量插画",
+                "keywords": [
+                    "flat color",
+                    "vector art",
+                    "thick outline",
+                    "minimalist",
+                    "Adobe Illustrator style"
+                ],
+                "tech_specs": "clean lines, geometric shapes, limited colors",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "ink_wash",
+                "name": "Ink Wash",
+                "name_zh": "水墨画",
+                "keywords": [
+                    "ink wash painting",
+                    "Chinese brush painting",
+                    "sumi-e",
+                    "traditional Chinese art",
+                    "monochrome"
+                ],
+                "tech_specs": "rice paper texture, gradient wash, calligraphic strokes",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "impasto",
+                "name": "Oil Painting",
+                "name_zh": "厚涂油画",
+                "keywords": [
+                    "oil painting",
+                    "thick brushstrokes",
+                    "textured canvas",
+                    "palette knife",
+                    "impressionist"
+                ],
+                "tech_specs": "visible texture, rich colors, classical technique",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "modern_anime",
+                "name": "Modern Anime",
+                "name_zh": "现代动漫",
+                "keywords": [
+                    "anime style",
+                    "2d illustration",
+                    "clean lines",
+                    "vibrant colors",
+                    "digital art"
+                ],
+                "tech_specs": "high resolution, gradient shading, detailed eyes",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            }
+        ],
+        "design": [
+            {
+                "id": "pop_mart",
+                "name": "Pop Mart Style",
+                "name_zh": "盲盒公仔",
+                "keywords": [
+                    "pop mart style",
+                    "chibi",
+                    "3d render",
+                    "PVC texture",
+                    "glossy finish",
+                    "cute"
+                ],
+                "tech_specs": "studio lighting, toy figure, collectible design",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "voxel",
+                "name": "Voxel Art",
+                "name_zh": "体素艺术",
+                "keywords": [
+                    "voxel art",
+                    "isometric view",
+                    "c4d render",
+                    "low poly",
+                    "pixel 3d"
+                ],
+                "tech_specs": "octane render, global illumination, soft shadows",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "clay",
+                "name": "Clay Render",
+                "name_zh": "黏土材质",
+                "keywords": [
+                    "clay material",
+                    "claymation",
+                    "octane render",
+                    "soft lighting",
+                    "matte texture"
+                ],
+                "tech_specs": "subsurface scattering, ambient occlusion, diffuse lighting",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "cyberpunk",
+                "name": "Cyberpunk",
+                "name_zh": "赛博朋克",
+                "keywords": [
+                    "cyberpunk",
+                    "neon lights",
+                    "futuristic",
+                    "rain",
+                    "dystopian",
+                    "hologram"
+                ],
+                "tech_specs": "neon glow, wet streets, chrome reflections",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            }
+        ],
+        "chinese_culture": [
+            {
+                "id": "hanfu",
+                "name": "Hanfu",
+                "name_zh": "汉服",
+                "keywords": [
+                    "hanfu",
+                    "traditional Chinese dress",
+                    "Tang dynasty style",
+                    "silk robes",
+                    "ancient China"
+                ],
+                "tech_specs": "embroidered patterns, flowing fabric, jade accessories",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "xianxia",
+                "name": "Xianxia",
+                "name_zh": "仙侠",
+                "keywords": [
+                    "xianxia style",
+                    "immortal cultivator",
+                    "flowing robes",
+                    "celestial",
+                    "cloud mountains"
+                ],
+                "tech_specs": "ethereal glow, misty mountains, celestial palace",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "wuxia",
+                "name": "Wuxia",
+                "name_zh": "武侠",
+                "keywords": [
+                    "wuxia style",
+                    "martial artist",
+                    "ancient China",
+                    "bamboo forest",
+                    "swordsman"
+                ],
+                "tech_specs": "dynamic action, scenic landscape, traditional architecture",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            },
+            {
+                "id": "guofeng",
+                "name": "Guofeng",
+                "name_zh": "国风",
+                "keywords": [
+                    "Chinese style",
+                    "traditional elements",
+                    "ink painting",
+                    "oriental aesthetic",
+                    "cultural motifs"
+                ],
+                "tech_specs": "red and gold colors, auspicious symbols, classical patterns",
+                "model_target": [
+                    "z-image-turbo",
+                    "sdxl"
+                ]
+            }
+        ]
+    }
+}

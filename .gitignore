@@ -205,3 +205,42 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ============================================
+# Project-specific ignores
+# ============================================
+
+# Node.js / npm
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vue.js / Vite build outputs
+custom_nodes/comfyui-prompt-skills/web/node_modules/
+custom_nodes/comfyui-prompt-skills/js/prompt-skills*.js
+custom_nodes/comfyui-prompt-skills/js/style.css
+
+# Python build artifacts
+custom_nodes/comfyui-prompt-skills/build/
+custom_nodes/comfyui-prompt-skills/dist/
+custom_nodes/comfyui-prompt-skills/*.egg-info/
+
+# Logs
+custom_nodes/comfyui-prompt-skills/logs/*.log
+custom_nodes/comfyui-prompt-skills/logs/.session_cache.json
+
+# Session/cache data
+.session_cache.json
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
