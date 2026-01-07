@@ -1,0 +1,16 @@
+{
+  "positive_prompt": "golden hour, backlit, warm light, shot on 85mm f/1.8 lens, shallow depth of field, professional photography, a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill, looking out the window with curiosity, sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere, close-up shot, natural lighting, detailed fur texture",
+  "negative_prompt": "",
+  "structured": {
+    "subject": "a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill",
+    "environment": "sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere",
+    "style": "golden hour photography with backlit warm lighting",
+    "tech_specs": "85mm f/1.8 lens, shallow depth of field, professional photography, golden hour lighting"
+  },
+  "bilingual": {
+    "subject_zh": "一只毛茸茸的橘色虎斑猫，亮绿色的眼睛，舒适地坐在木制窗台上",
+    "subject_en": "a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill",
+    "environment_zh": "阳光透过窗户照射进来，形成镜头光晕和温暖的亮点，舒适的室内氛围",
+    "environment_en": "sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere"
+  }
+}

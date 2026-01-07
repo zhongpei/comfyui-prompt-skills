@@ -37,11 +37,13 @@ def start_flask_service() -> None:
         
         def run_flask():
             app = create_app()
-            logger.info("Starting Flask Logic Layer on port 5000...")
+            # Get port from environment or use default 8189 (avoid 5000 which is AirPlay on Mac)
+            port = int(os.environ.get("COMFYUI_PROMPT_SKILLS_PORT", 8189))
+            logger.info(f"Starting Flask Logic Layer on port {port}...")
             socketio.run(
                 app,
                 host="127.0.0.1",
-                port=5000,
+                port=port,
                 allow_unsafe_werkzeug=True,
                 debug=False,
                 use_reloader=False,

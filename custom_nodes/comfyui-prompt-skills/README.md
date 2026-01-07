@@ -56,6 +56,35 @@ npm run build
 npm install -g opencode
 ```
 
+### 4. 配置 OpenCode (Z.AI GLM Coding Plan)
+
+本项目默认配置使用 Z.AI 的 GLM Coding Plan。请在项目根目录使用提供的 `opencode.json` 文件。
+
+**opencode.json**:
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "zai": {}
+  },
+  "model": "zai/glm-4.7"
+}
+```
+
+**连接 Z.AI**:
+
+1. 获取 API Key: [Z.AI API Console](https://z.ai/manage-apikey/apikey-list)
+2. 连接账号:
+   ```bash
+   opencode /connect
+   # 选择 Z.AI -> 输入 API Key
+   ```
+3. 验证模型:
+   ```bash
+   opencode /models
+   # 确认可以看到 glm-4.7
+   ```
+
 ## 使用方法
 
 1. 在 ComfyUI 中添加 **Prompt Skills Generator** 节点

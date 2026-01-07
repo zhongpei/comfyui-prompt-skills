@@ -88,7 +88,10 @@ export default {
     const initSocket = () => {
       sessionId.value = generateSessionId()
       
-      socket.value = io('http://127.0.0.1:5000', {
+      // Connect to Flask backend (port 8189 default)
+      // Note: This hardcoding is a limitation of the current decoupled architecture.
+      // Ideally this config should flow from the node.
+      socket.value = io('http://127.0.0.1:8189', {
         query: { session_id: sessionId.value },
         transports: ['websocket'],
         reconnection: true,

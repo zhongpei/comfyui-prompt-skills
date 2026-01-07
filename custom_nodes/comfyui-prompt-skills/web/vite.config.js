@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [vue()],
     build: {
         outDir: '../js',
-        emptyOutDir: true,
+        emptyOutDir: false,
         lib: {
             entry: path.resolve(__dirname, 'src/main.js'),
             name: 'PromptSkillsVue',

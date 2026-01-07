@@ -51,7 +51,8 @@ fi
 # 1. Install Python package via pip
 echo -e "${YELLOW}[1/4] Installing Python package...${NC}"
 echo "  Wheel: ${WHEEL_FILE}"
-pip install --force-reinstall "${WHEEL_FILE}"
+echo "  Python: $(which python3)"
+python3 -m pip install --force-reinstall "${WHEEL_FILE}"
 echo -e "${GREEN}  ✓ Python package installed${NC}"
 
 # 2. Copy JavaScript files (frontend)
