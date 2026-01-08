@@ -23,7 +23,9 @@ class OpencodeConfig:
     host: str = "127.0.0.1"
     port: int = 4096
     timeout: float = 60.0
+    message_timeout: float = 300.0  # Longer timeout for AI generation
     max_retries: int = 3
+    config_path: str | None = None
     
     @property
     def base_url(self) -> str:
@@ -78,8 +80,12 @@ class OpencodeClient:
             
             try:
                 # Start OpenCode Server
+                cmd = ["opencode", "serve", "--port", str(self._config.port)]
+                if self._config.config_path:
+                    cmd.extend(["--config", self._config.config_path])
+
                 self._server_process = subprocess.Popen(
-                    ["opencode", "serve", "--port", str(self._config.port)],
+                    cmd,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
                 )
@@ -162,9 +168,11 @@ class OpencodeClient:
             if system:
                 payload["system"] = system
             
+            # Use longer timeout for message operations (AI generation can take a while)
             response = self.client.post(
                 f"/session/{session_id}/message",
                 json=payload,
+                timeout=self._config.message_timeout,
             )
             if response.status_code == 200:
                 return response.json()
@@ -234,6 +242,14 @@ class OpencodeClient:
         if self._server_process:
             self._server_process.terminate()
             self._server_process = None
+
+    def configure(self, config: OpencodeConfig) -> None:
+        """Update client configuration."""
+        self._config = config
+        # Reset client to ensure new config takes effect
+        if self._client:
+            self._client.close()
+            self._client = None
 
 
 # Global singleton instance

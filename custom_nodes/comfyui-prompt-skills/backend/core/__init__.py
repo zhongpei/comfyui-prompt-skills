@@ -2,7 +2,7 @@
 
 from .session_manager import SessionManager, get_session_manager
 from .skill_registry import SkillRegistry, get_skill_registry
-from .opencode_client import OpencodeClient, get_opencode_client
+from .opencode_client import OpencodeClient, get_opencode_client, OpencodeConfig
 from .output_formatter import OutputFormatter, get_output_formatter
 from .debug_logger import (
     DebugEmitter,
@@ -14,8 +14,9 @@ from .debug_logger import (
 
 __all__ = [
     "SessionManager",
-    "SkillRegistry", 
+    "SkillRegistry",
     "OpencodeClient",
+    "OpencodeConfig",
     "OutputFormatter",
     "DebugEmitter",
     "get_session_manager",

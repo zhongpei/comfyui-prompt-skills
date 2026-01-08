@@ -69,34 +69,55 @@ class OutputFormatter:
     
     def _to_comma_separated(self, data: dict[str, Any]) -> str:
         """Convert structured data to comma-separated string."""
+        # Priority 1: if positive_prompt exists and is non-empty, use it directly
+        if "positive_prompt" in data and isinstance(data["positive_prompt"], str) and data["positive_prompt"].strip():
+            return data["positive_prompt"].strip()
+        
+        # Priority 2: if prompt exists (common alternative name)
+        if "prompt" in data and isinstance(data["prompt"], str) and data["prompt"].strip():
+            return data["prompt"].strip()
+        
+        # Priority 3: Build from structured fields
         parts = []
         
-        # Extract from common field names
-        for key in ["positive_prompt", "prompt", "main", "subject", "content"]:
-            if key in data and isinstance(data[key], str):
-                parts.append(data[key])
+        # Extract from common field names for subject/content
+        for key in ["subject", "subject_en", "main", "content"]:
+            if key in data and isinstance(data[key], str) and data[key].strip():
+                parts.append(data[key].strip())
                 break
         
         # Add style if present
-        for key in ["style", "styles", "aesthetic"]:
+        for key in ["style", "style_en", "styles", "aesthetic"]:
             if key in data:
                 value = data[key]
-                if isinstance(value, str):
-                    parts.append(value)
+                if isinstance(value, str) and value.strip():
+                    parts.append(value.strip())
+                    break
                 elif isinstance(value, list):
-                    parts.extend(str(v) for v in value)
+                    parts.extend(str(v).strip() for v in value if str(v).strip())
+                    break
         
         # Add environment if present
-        for key in ["environment", "setting", "background"]:
-            if key in data and isinstance(data[key], str):
-                parts.append(data[key])
+        for key in ["environment", "environment_en", "setting", "background"]:
+            if key in data and isinstance(data[key], str) and data[key].strip():
+                parts.append(data[key].strip())
+                break
         
         # Add technical specs if present
         for key in ["tech_specs", "technical", "camera", "lighting"]:
-            if key in data and isinstance(data[key], str):
-                parts.append(data[key])
+            if key in data and isinstance(data[key], str) and data[key].strip():
+                parts.append(data[key].strip())
+                break
         
-        return ", ".join(parts) if parts else str(data)
+        if parts:
+            return ", ".join(parts)
+        
+        # Fallback: try to find any human-readable string value
+        for key, value in data.items():
+            if isinstance(value, str) and len(value) > 10 and not key.startswith("_"):
+                return value.strip()
+        
+        return ""
     
     def _to_bilingual(self, data: dict[str, Any]) -> str:
         """Convert to bilingual format (Chinese/English pairs)."""

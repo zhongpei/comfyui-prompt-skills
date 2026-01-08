@@ -108,3 +108,85 @@ class TestSessionManager:
         assert "api_key" not in data.get("config", {})
         assert "id" in data
         assert "history" in data
+
+
+class TestSessionManagerOutput:
+    """Test SessionManager output storage (simplified, no waiting)."""
+    
+    def test_set_output(self, session_manager):
+        """Should store output in session."""
+        session_manager.create_session("output-test")
+        session_manager.set_output(
+            "output-test",
+            prompt_english="a beautiful sunset",
+            prompt_json='{"prompt": "sunset"}',
+            prompt_bilingual="日落 / sunset",
+        )
+        
+        session = session_manager.get_session("output-test")
+        assert session.last_output["prompt_english"] == "a beautiful sunset"
+        assert session.last_output["prompt_json"] == '{"prompt": "sunset"}'
+        assert session.last_output["prompt_bilingual"] == "日落 / sunset"
+    
+    def test_get_output_immediate(self, session_manager):
+        """Should get output immediately."""
+        session_manager.create_session("get-output-test")
+        session_manager.set_output(
+            "get-output-test",
+            prompt_english="test prompt",
+            prompt_json="{}",
+            prompt_bilingual="测试",
+        )
+        
+        output = session_manager.get_output("get-output-test")
+        assert output["prompt_english"] == "test prompt"
+    
+    def test_get_output_nonexistent_session(self, session_manager):
+        """Should return empty dict for nonexistent session."""
+        output = session_manager.get_output("nonexistent-session")
+        assert output["prompt_english"] == ""
+        assert output["prompt_json"] == ""
+        assert output["prompt_bilingual"] == ""
+    
+    def test_get_output_empty_before_set(self, session_manager):
+        """Should return empty output before any set_output call."""
+        session_manager.create_session("empty-output-test")
+        output = session_manager.get_output("empty-output-test")
+        assert output["prompt_english"] == ""
+        assert output["prompt_json"] == ""
+        assert output["prompt_bilingual"] == ""
+
+
+class TestSessionManagerOpencode:
+    """Test SessionManager OpenCode session management."""
+    
+    def test_set_opencode_session(self, session_manager):
+        """Should store OpenCode session ID."""
+        session_manager.create_session("opencode-test")
+        session_manager.set_opencode_session("opencode-test", "oc-12345")
+        
+        assert session_manager.get_opencode_session("opencode-test") == "oc-12345"
+    
+    def test_get_opencode_session_nonexistent(self, session_manager):
+        """Should return None for session without OpenCode ID."""
+        session_manager.create_session("no-opencode-test")
+        assert session_manager.get_opencode_session("no-opencode-test") is None
+    
+    def test_clear_opencode_session(self, session_manager):
+        """Should clear OpenCode session ID."""
+        session_manager.create_session("clear-opencode-test")
+        session_manager.set_opencode_session("clear-opencode-test", "oc-54321")
+        assert session_manager.get_opencode_session("clear-opencode-test") == "oc-54321"
+        
+        session_manager.clear_opencode_session("clear-opencode-test")
+        assert session_manager.get_opencode_session("clear-opencode-test") is None
+    
+    def test_session_to_dict_includes_opencode_id(self, session_manager):
+        """Session.to_dict should include opencode_session_id."""
+        session_manager.create_session("dict-opencode-test")
+        session_manager.set_opencode_session("dict-opencode-test", "oc-abcdef")
+        
+        session = session_manager.get_session("dict-opencode-test")
+        data = session.to_dict()
+        
+        assert data["opencode_session_id"] == "oc-abcdef"

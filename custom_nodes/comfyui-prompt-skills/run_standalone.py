@@ -26,7 +26,22 @@ def main():
     
     # 1. Start OpenCode Server (Tier 3)
     print("\n[Tier 3] Checking OpenCode Server...")
+    
+    # Configure OpenCode Client
+    from backend.core import get_opencode_client, OpencodeConfig
+    
+    # Determine config path: repo root
+    repo_root = PROJECT_ROOT.parent.parent
+    config_path = repo_root / "opencode.json"
+    
     client = get_opencode_client()
+    
+    if config_path.exists():
+        print(f"👉 Using OpenCode config: {config_path}")
+        client.configure(OpencodeConfig(config_path=str(config_path)))
+    else:
+        print("⚠️ opencode.json not found, using default configuration")
+
     if client.ensure_server_running():
         print("✅ OpenCode Server is running")
     else:

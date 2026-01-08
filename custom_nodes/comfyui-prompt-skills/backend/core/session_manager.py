@@ -21,6 +21,14 @@ class Session:
     skills: list[str] = field(default_factory=list)
     config: dict[str, Any] = field(default_factory=dict)
     status: str = "idle"  # idle, working, error
+    # OpenCode session ID - persistent across messages
+    opencode_session_id: str | None = None
+    # Store latest generated output for ComfyUI node
+    last_output: dict[str, str] = field(default_factory=lambda: {
+        "prompt_english": "",
+        "prompt_json": "",
+        "prompt_bilingual": "",
+    })
     
     def to_dict(self) -> dict[str, Any]:
         """Serialize session to dictionary for WebSocket sync."""
@@ -28,8 +36,9 @@ class Session:
             "id": self.id,
             "history": self.history,
             "skills": self.skills,
-            "config": {k: v for k, v in self.config.items() if k != "api_key"},  # Don't expose api_key
+            "config": {k: v for k, v in self.config.items() if k != "api_key"},
             "status": self.status,
+            "opencode_session_id": self.opencode_session_id,
         }
 
 
@@ -104,6 +113,25 @@ class SessionManager:
         
         return session
     
+    def set_opencode_session(self, session_id: str, opencode_session_id: str) -> None:
+        """Set the OpenCode session ID for a session."""
+        session = self.get_session(session_id)
+        if session:
+            with self._lock:
+                session.opencode_session_id = opencode_session_id
+    
+    def get_opencode_session(self, session_id: str) -> str | None:
+        """Get the OpenCode session ID for a session."""
+        session = self.get_session(session_id)
+        return session.opencode_session_id if session else None
+    
+    def clear_opencode_session(self, session_id: str) -> None:
+        """Clear the OpenCode session ID (for creating new session)."""
+        session = self.get_session(session_id)
+        if session:
+            with self._lock:
+                session.opencode_session_id = None
+    
     def add_message(
         self, 
         session_id: str, 
@@ -149,6 +177,37 @@ class SessionManager:
         """Clear all sessions (for testing purposes)."""
         with self._lock:
             self._sessions.clear()
+    
+    def set_output(
+        self,
+        session_id: str,
+        prompt_english: str,
+        prompt_json: str,
+        prompt_bilingual: str,
+    ) -> None:
+        """Store generated output for ComfyUI node to retrieve."""
+        session = self.get_session(session_id)
+        if session:
+            with self._lock:
+                session.last_output = {
+                    "prompt_english": prompt_english,
+                    "prompt_json": prompt_json,
+                    "prompt_bilingual": prompt_bilingual,
+                }
+    
+    def get_output(self, session_id: str) -> dict[str, str]:
+        """
+        Get the latest generated output for a session.
+        Returns immediately with current output (no waiting).
+        """
+        session = self.get_session(session_id)
+        if session:
+            return session.last_output
+        return {
+            "prompt_english": "",
+            "prompt_json": "",
+            "prompt_bilingual": "",
+        }
 
 
 # Global singleton instance

@@ -1,16 +1,16 @@
 {
-  "positive_prompt": "golden hour, backlit, warm light, shot on 85mm f/1.8 lens, shallow depth of field, professional photography, a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill, looking out the window with curiosity, sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere, close-up shot, natural lighting, detailed fur texture",
+  "positive_prompt": "hanfu, Tang dynasty style, red ruqun, standing under cherry blossom tree, traditional Chinese scene, silk texture, embroidered pattern, soft natural lighting, elegant pose, ancient Chinese beauty, masterpiece, best quality, highly detailed",
   "negative_prompt": "",
   "structured": {
-    "subject": "a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill",
-    "environment": "sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere",
-    "style": "golden hour photography with backlit warm lighting",
-    "tech_specs": "85mm f/1.8 lens, shallow depth of field, professional photography, golden hour lighting"
+    "subject": "young woman in red Tang dynasty hanfu, elegant pose, detailed clothing with silk texture and embroidery",
+    "environment": "cherry blossom tree in spring, traditional Chinese garden with soft natural lighting",
+    "style": "Chinese traditional, elegant, xianxia-inspired",
+    "tech_specs": "soft natural lighting, detailed fabric texture, cinematic composition"
   },
   "bilingual": {
-    "subject_zh": "一只毛茸茸的橘色虎斑猫，亮绿色的眼睛，舒适地坐在木制窗台上",
-    "subject_en": "a fluffy orange tabby cat with bright green eyes, sitting comfortably on a wooden windowsill",
-    "environment_zh": "阳光透过窗户照射进来，形成镜头光晕和温暖的亮点，舒适的室内氛围",
-    "environment_en": "sunlight streaming through the window, creating lens flare and warm highlights, cozy indoor atmosphere"
+    "subject_zh": "身穿唐代红色齐胸襦裙的少女，优雅站立，丝绸质感，刺绣花纹",
+    "subject_en": "Young woman in red Tang dynasty qixiong ruqun, elegant pose, silk texture, embroidered pattern",
+    "environment_zh": "樱花树下，春日中式庭院，柔和自然光线",
+    "environment_en": "Under cherry blossom tree, traditional Chinese garden in spring, soft natural lighting"
   }
 }

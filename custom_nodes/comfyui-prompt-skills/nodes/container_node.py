@@ -39,7 +39,7 @@ class OpencodeContainerNode:
             },
             "optional": {
                 "api_endpoint": ("STRING", {
-                    "default": "http://127.0.0.1:5000",
+                    "default": "http://127.0.0.1:8189",
                     "multiline": False,
                 }),
                 "model_target": (["z-image-turbo", "sdxl"], {
@@ -57,6 +57,16 @@ class OpencodeContainerNode:
     OUTPUT_NODE = True
     CATEGORY = "Prompt Skills"
     
+    @classmethod
+    def IS_CHANGED(cls, session_id, **kwargs):
+        """
+        Force ComfyUI to always re-execute this node.
+        Returning NaN means the node output is never cached.
+        This is necessary because the output depends on external state
+        (SessionManager) that changes outside of ComfyUI's input tracking.
+        """
+        return float("NaN")
+    
     def run(
         self,
         session_id: str,
@@ -67,19 +77,45 @@ class OpencodeContainerNode:
         """
         Execute the node.
         
-        Note: This node does nothing on its own. Actual prompt generation
-        happens via the Vue frontend which communicates with the Flask
-        backend through WebSocket.
-        
-        The outputs are populated by the frontend storing results in
-        the widget values, which persist in the workflow JSON.
+        Retrieves the latest generated prompts from the SessionManager.
+        User should generate prompts via WebSocket/Vue UI first, then run the workflow.
         """
-        # The node itself doesn't process - it's just a container
-        # The Vue app handles all interaction and stores results
-        # in sessionStorage or emits them through ComfyUI API
-        
-        # Return empty strings - actual values come from widget persistence
-        return ("", "", "")
+        # Get output directly from session manager (no waiting needed)
+        try:
+            from ..backend.core import get_session_manager
+            
+            session_manager = get_session_manager()
+            
+            # Debug: print session info
+            print(f"[PromptSkills Node] run() called with session_id='{session_id}'")
+            
+            # Check if session exists
+            session = session_manager.get_session(session_id)
+            if session:
+                print(f"[PromptSkills Node] Session found: status={session.status}, opencode_id={session.opencode_session_id}")
+                print(f"[PromptSkills Node] last_output keys: {list(session.last_output.keys())}")
+                print(f"[PromptSkills Node] prompt_english length: {len(session.last_output.get('prompt_english', ''))}")
+            else:
+                print(f"[PromptSkills Node] Session NOT FOUND for id='{session_id}'")
+                # List all sessions for debugging
+                all_sessions = session_manager.list_sessions()
+                print(f"[PromptSkills Node] Available sessions: {all_sessions}")
+            
+            output = session_manager.get_output(session_id)
+            
+            result = (
+                output.get("prompt_english", ""),
+                output.get("prompt_json", ""),
+                output.get("prompt_bilingual", ""),
+            )
+            print(f"[PromptSkills Node] Returning: english={len(result[0])} chars, json={len(result[1])} chars")
+            return result
+            
+        except Exception as e:
+            print(f"[PromptSkills Node] Exception: {e}")
+            import traceback
+            traceback.print_exc()
+            return ("", "", "")
 
 
 # Node registration for ComfyUI

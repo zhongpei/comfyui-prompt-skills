@@ -75,6 +75,7 @@ dist: package
 	cp __init__.py dist/deploy/
 	cp install.sh dist/deploy/
 	cp dist/*.whl dist/deploy/
+	cp ../../opencode.json dist/deploy/
 	@echo "✅ Distribution package ready in dist/deploy/"
 
 deploy:

@@ -67,8 +67,12 @@ app.registerExtension({
             // Load and mount Vue app
             const mount = await loadVueApp();
             if (mount) {
-                mount(container, node);
-                console.log("Prompt Skills: Vue app mounted for node", node.id);
+                // Find API endpoint from widgets
+                const apiWidget = node.widgets?.find(w => w.name === "api_endpoint");
+                const apiEndpoint = apiWidget ? apiWidget.value : "http://127.0.0.1:8189";
+
+                mount(container, node, apiEndpoint);
+                console.log("Prompt Skills: Vue app mounted for node", node.id, "API:", apiEndpoint);
             } else {
                 // Fallback message
                 container.innerHTML = `
@@ -89,7 +93,7 @@ app.registerExtension({
         // Hide the default widgets since Vue app handles everything
         if (node.widgets) {
             for (const widget of node.widgets) {
-                if (widget.name === "session_id" || widget.name === "api_endpoint") {
+                if (widget.name === "session_id") {
                     widget.type = "hidden";
                 }
             }
