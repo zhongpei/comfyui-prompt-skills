@@ -27,7 +27,57 @@
 └─────────────────────────────────────────┘
 ```
 
-## 安装
+## 安装 (Installation)
+
+### 推荐安装步骤 (Recommended)
+
+本插件支持直接从 GitHub 安装，但由于仓库结构的特殊性，请严格按照以下步骤操作：
+
+1. **进入 ComfyUI 插件目录**:
+   ```bash
+   cd ComfyUI/custom_nodes/
+   ```
+
+2. **克隆仓库**:
+   ```bash
+   # 克隆到临时目录
+   git clone https://github.com/zhongpei/comfyui-prompt-skills.git tmp_prompt_skills
+   ```
+
+3. **部署插件**:
+   由于核心代码位于仓库的子目录中，需要将其移动出来：
+   ```bash
+   # 将插件核心目录移动到 custom_nodes
+   mv tmp_prompt_skills/custom_nodes/comfyui-prompt-skills ./comfyui-prompt-skills
+
+   # 删除临时目录
+   rm -rf tmp_prompt_skills
+   ```
+
+4. **安装 Python 依赖**:
+   ```bash
+   cd comfyui-prompt-skills
+   pip install -e .
+   ```
+   *注意：如果使用 Portable 版 ComfyUI，请使用对应的 python 环境，例如 `..\..\python_embeded\python.exe -m pip install -e .`*
+
+5. **重启 ComfyUI**
+
+### 如何更新 (Update)
+
+建议直接删除旧目录并重新安装：
+
+```bash
+cd ComfyUI/custom_nodes/
+rm -rf comfyui-prompt-skills
+# 重新执行上述安装步骤
+```
+
+---
+
+## 开发环境设置 (Development Setup)
+
+如果您是开发者需要构建前端或进行二次开发，请参考以下步骤：
 
 ### 1. Python 依赖
 
